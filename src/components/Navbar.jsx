@@ -16,19 +16,24 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
-    // Check if we're in a browser environment before accessing localStorage
-    if (typeof window !== "undefined") {
-      const storedTheme = localStorage.getItem("theme");
-      if (storedTheme === "dark") {
-        setIsDarkMode(true);
-        document.documentElement.classList.add("dark");
-      } else {
-        localStorage.setItem("theme", "light");
-        setIsDarkMode(false);
-      }
+    if (typeof window === "undefined") return;
+
+    const storedTheme = localStorage.getItem("theme");
+
+    if (storedTheme === "dark") {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else if (storedTheme === "light") {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    } else {
+      // first visit: no stored key -> default to dark
+      localStorage.setItem("theme", "dark");
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
     }
   }, []);
 
