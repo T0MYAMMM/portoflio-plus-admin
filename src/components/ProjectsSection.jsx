@@ -114,11 +114,6 @@ const projects = [
   },
 ];
 
-const swipeConfidenceThreshold = 10000;
-const swipePower = (offset, velocity) => {
-  return Math.abs(offset) * velocity;
-};
-
 const ProjectCard = ({ project, index }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
@@ -237,50 +232,6 @@ const ProjectCard = ({ project, index }) => (
 );
 
 const Carousel = ({ currentIndex, setCurrentIndex, direction }) => {
-  const hasPaginated = useRef(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const detectPaginationGesture = (e, { offset, velocity }) => {
-    if (hasPaginated.current) return;
-    const swipe = swipePower(offset.x, velocity.x);
-
-    // For mobile, we show 1-2 cards per page, so adjust pagination logic
-    const cardsPerPage =
-      window.innerWidth < 640 ? 1 : window.innerWidth < 768 ? 2 : 3;
-    const currentPage = Math.floor(currentIndex / cardsPerPage);
-    const totalPages = Math.ceil(projects.length / cardsPerPage);
-
-    if (swipe < -swipeConfidenceThreshold && currentPage < totalPages - 1) {
-      paginate(1);
-    } else if (swipe > swipeConfidenceThreshold && currentPage > 0) {
-      paginate(-1);
-    }
-  };
-
-  const paginate = (newDirection) => {
-    if (hasPaginated.current) return;
-    hasPaginated.current = true;
-
-    const cardsPerPage =
-      window.innerWidth < 640 ? 1 : window.innerWidth < 768 ? 2 : 3;
-    const currentPage = Math.floor(currentIndex / cardsPerPage);
-    const totalPages = Math.ceil(projects.length / cardsPerPage);
-    const newPage = currentPage + newDirection;
-
-    if (newPage < 0 || newPage >= totalPages) return;
-    const newIndex = newPage * cardsPerPage;
-    setCurrentIndex(newIndex, newDirection);
-  };
-
   const getCardsToShow = () => {
     const cardsPerPage =
       window.innerWidth < 640 ? 1 : window.innerWidth < 768 ? 2 : 3;
@@ -318,13 +269,6 @@ const Carousel = ({ currentIndex, setCurrentIndex, direction }) => {
             x: { type: "spring", stiffness: 100, damping: 30 },
             opacity: { duration: 0.6 },
           }}
-          drag={isMobile ? "x" : false}
-          dragConstraints={isMobile ? { left: 0, right: 0 } : undefined}
-          dragElastic={isMobile ? 1 : 0}
-          onDragStart={
-            isMobile ? () => (hasPaginated.current = false) : undefined
-          }
-          onDragEnd={isMobile ? detectPaginationGesture : undefined}
           className="absolute inset-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0"
         >
           {Array.from({ length: getCardsToShow() }).map((_, offset) => {

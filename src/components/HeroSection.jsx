@@ -135,7 +135,7 @@ export const HeroSection = () => {
       {/* Scroll indicator */}
       <button
         onClick={() => scrollToSection("experience")}
-        className="absolute bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce hover:text-primary transition-colors duration-300 cursor-pointer border-none bg-transparent"
+        className="hidden lg:flex absolute bottom-6 lg:bottom-8 left-1/2 transform -translate-x-1/2 flex-col items-center animate-bounce hover:text-primary transition-colors duration-300 cursor-pointer border-none bg-transparent"
       >
         <span className="text-xs lg:text-sm text-foreground/60 mb-1 lg:mb-2">
           Scroll
