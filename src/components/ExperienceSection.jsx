@@ -1,15 +1,15 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 export const ExperienceSection = () => {
   const experiences = [
     {
-      title: "Summer Intern",
-      company: "IBM",
-      type: "Internship",
-      location: "Remote",
-      duration: "June 2025 - Present • 2 mos",
-      description: "At IBM, I worked on the project...",
-      skills: ["tech1", "tech2", "tech3"],
+      title: 'Data Science Intern',
+      company: 'Transvolt Mobility',
+      type: 'On-site',
+      location: 'Gurgaon',
+      duration: 'June 2025 - Present • 2 mos',
+      description: 'At Transvolt, I worked on the project...',
+      skills: ['Django', 'PostgreSQL'],
     },
   ];
 
@@ -35,7 +35,7 @@ export const ExperienceSection = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: 'easeOut',
       },
     },
   };
@@ -49,7 +49,7 @@ export const ExperienceSection = () => {
       scaleY: 1,
       transition: {
         duration: 1.2,
-        ease: "easeOut",
+        ease: 'easeOut',
         delay: 0.5,
       },
     },
@@ -67,7 +67,7 @@ export const ExperienceSection = () => {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: 'easeOut',
       },
     },
   };
@@ -82,7 +82,7 @@ export const ExperienceSection = () => {
       opacity: 1,
       transition: {
         duration: 0.4,
-        ease: "backOut",
+        ease: 'backOut',
         delay: 0.3,
       },
     },
@@ -100,7 +100,7 @@ export const ExperienceSection = () => {
       y: 0,
       transition: {
         duration: 0.3,
-        ease: "easeOut",
+        ease: 'easeOut',
       },
     },
   };
@@ -122,7 +122,7 @@ export const ExperienceSection = () => {
           variants={headerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
         >
           <motion.h2
             className="text-4xl md:text-5xl font-bold mb-2 py-2"
@@ -151,7 +151,7 @@ export const ExperienceSection = () => {
             variants={timelineVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-200px" }}
+            viewport={{ once: true, margin: '-200px' }}
           />
 
           <motion.div
@@ -159,7 +159,7 @@ export const ExperienceSection = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
           >
             {experiences.map((exp, index) => (
               <motion.div
