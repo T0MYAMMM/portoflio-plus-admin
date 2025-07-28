@@ -1,118 +1,7 @@
 import { ArrowLeft, ArrowRight, Github } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const projects = [
-  {
-    id: 1,
-    title: "Snap-n-Solve",
-    description:
-      "A real-time Sudoku puzzle solver that uses computer vision and machine learning to detect, solve, and overlay solutions on Sudoku puzzles captured through your webcam",
-    image: "/projects/snap-n-solve.jpeg",
-    tags: ["Python", "OpenCV", "TensorFlow", "NumPy", "Keras"],
-    demoUrl: "#",
-    githubUrl: "https://github.com/shubhs27/Snap-n-Solve",
-    demoStatus: "offline",
-  },
-  {
-    id: 2,
-    title: "The Wild Oasis",
-    description:
-      "An internal hotel management application designed for hotel employees to efficiently manage bookings, cabins, guests, and more",
-    image: "/projects/wildOasis.png",
-    tags: [
-      "React",
-      "Styled-Components",
-      "React-Query",
-      "React-Hook-Form",
-      "Recharts",
-      "Supabase",
-    ],
-    demoUrl: "https://the-wild-oasis-shubhanan.vercel.app/",
-    githubUrl: "https://github.com/shubhs27/The-wild-oasis",
-    demoStatus: "online",
-  },
-  {
-    id: 3,
-    title: "PomodoLock",
-    description:
-      "A powerful Chrome extension that combines the Pomodoro technique with website blocking functionality to boost your productivity",
-    image: "/projects/pomodoLock.png",
-    tags: ["JavaScript", "Chrome Extension"],
-    demoUrl:
-      "https://chrome.google.com/webstore/detail/mapddbpaaaachoidpbolhpckhillhbpj",
-    githubUrl: "https://github.com/shubhs27/PomodoLock",
-    demoStatus: "online",
-  },
-  {
-    id: 4,
-    title: "Natours",
-    description:
-      "A dynamic tour booking platform which delivers a seamless travel planning experience with secure authentication, advanced tour filtering, interactive maps, and streamlined booking processes",
-    image: "/projects/natours.png",
-    tags: ["Node.js", "Express.js", "MongoDB", "Mongoose", "REST-API", "Pug"],
-    demoUrl: "https://natours-shubhanan.onrender.com",
-    githubUrl: "https://github.com/shubhs27/Natours",
-    demoStatus: "online",
-  },
-  {
-    id: 5,
-    title: "The Wild Oasis (Website)",
-    description:
-      "A luxurious cabin booking platform for a resort located in the heart of the Italian Dolomites",
-    image: "/projects/wildOasisWebsite.png",
-    tags: ["Next.js", "Tailwind CSS", "Supabase", "NextAuth-Google"],
-    demoUrl: "https://the-wild-oasis-website-shubhanan.vercel.app/",
-    githubUrl: "https://github.com/shubhs27/The-wild-oasis-website",
-    demoStatus: "online",
-  },
-  {
-    id: 6,
-    title: "NoMoRecs",
-    description:
-      "A lightweight Chrome extension designed to help users focus on their chosen content by blocking YouTube's recommendation algorithm",
-    image: "/projects/noMoRecs.png",
-    tags: ["JavaScript", "Chrome Extension"],
-    demoUrl:
-      "https://chrome.google.com/webstore/detail/nppghgjojmhangjjbnlmdlahncpoddbi",
-    githubUrl: "https://github.com/shubhs27/NoMoRecs",
-    demoStatus: "online",
-  },
-  {
-    id: 7,
-    title: "Use-Popcorn",
-    description:
-      "A React application for searching movies and tracking your personal watchlist with ratings",
-    image: "/projects/usePopcorn.png",
-    tags: ["React"],
-    demoUrl: "https://use-popcorn-shubhanan.netlify.app/",
-    githubUrl: "https://github.com/shubhs27/Use-Popcorn",
-    demoStatus: "online",
-  },
-  {
-    id: 8,
-    title: "Fast React Pizza",
-    description:
-      "A fully functional pizza ordering application that allows users to browse the menu, add items to cart, place orders, and track their order status",
-    image: "/projects/fastPizza.png",
-    tags: ["React", "Redux", "React-Router", "Tailwind CSS"],
-    demoUrl: "https://fast-react-pizza-shubhanan.netlify.app/",
-    githubUrl: "https://github.com/shubhs27/Fast-react-pizza",
-    demoStatus: "online",
-  },
-  {
-    id: 9,
-    title: "PureView",
-    description:
-      "A lightweight Chrome extension designed to give users a cleaner and distraction-free web browsing experience by blocking intrusive ads",
-    image: "/projects/pureView.png",
-    tags: ["JavaScript", "Chrome Extension"],
-    demoUrl:
-      "https://chrome.google.com/webstore/detail/dnndbeelpmgipmibcbocajpimolmoica",
-    githubUrl: "https://github.com/shubhs27/PureView",
-    demoStatus: "online",
-  },
-];
+import usePortfolioStore from '../admin/store/portfolioStore';
 
 const ProjectCard = ({ project, index }) => (
   <motion.div
@@ -231,7 +120,7 @@ const ProjectCard = ({ project, index }) => (
   </motion.div>
 );
 
-const Carousel = ({ currentIndex, setCurrentIndex, direction }) => {
+const Carousel = ({ projects, currentIndex, setCurrentIndex, direction }) => {
   const getCardsToShow = () => {
     const cardsPerPage =
       window.innerWidth < 640 ? 1 : window.innerWidth < 768 ? 2 : 3;
@@ -290,6 +179,9 @@ const Carousel = ({ currentIndex, setCurrentIndex, direction }) => {
 };
 
 export const ProjectsSection = () => {
+  const { projects } = usePortfolioStore();
+  const projectsData = projects || [];
+
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 0]);
   const [cardsPerPage, setCardsPerPage] = useState(3);
 
@@ -371,6 +263,7 @@ export const ProjectsSection = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <Carousel
+            projects={projectsData}
             currentIndex={currentIndex}
             setCurrentIndex={([index, dir]) => setCurrentIndex([index, dir])}
             direction={direction}

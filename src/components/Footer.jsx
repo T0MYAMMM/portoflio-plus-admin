@@ -7,7 +7,7 @@ export const Footer = () => {
         &copy; {new Date().getFullYear()} All rights reserved by{" "}
         <strong>
           <span className="transition-colors hover:text-primary">
-            Shubhanan Sharma
+            Thomas Stefen
           </span>
         </strong>
       </p>

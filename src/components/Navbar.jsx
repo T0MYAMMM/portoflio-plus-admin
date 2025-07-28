@@ -241,7 +241,7 @@ export const Navbar = () => {
                 ease: "easeInOut",
               }}
             >
-              <span className="hidden sm:inline">Shubhanan's</span>
+              <span className="hidden sm:inline">Thomas's</span>
               <span className="sm:hidden">S.</span>
             </motion.span>
             <span className="ml-1">Portfolio</span>

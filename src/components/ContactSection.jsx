@@ -222,12 +222,12 @@ export const ContactSection = () => {
                   label: "GitHub",
                 },
                 {
-                  href: "https://www.linkedin.com/in/shubhs27/",
+                  href: "https://www.linkedin.com/in/thomasstefenm/",
                   icon: Linkedin,
                   label: "LinkedIn",
                 },
                 {
-                  href: "mailto:shubhanans@gmail.com",
+                  href: "mailto:thomasstefenm@gmail.com",
                   icon: Mail,
                   label: "Email",
                 },

@@ -7,15 +7,21 @@ import {
   ArrowDown,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import usePortfolioStore from '../admin/store/portfolioStore';
 
 export const HeroSection = () => {
+  const { hero } = usePortfolioStore();
   const [currentTitle, setCurrentTitle] = useState(0);
-  const titles = [
-    "Full Stack Developer",
-    "Passionate about AI/ML",
-    "Tech Enthusiast",
-    "Problem Solver",
-  ];
+  
+  // Use titles from store, fallback to default if empty
+  const titles = hero?.personalInfo?.titles?.length > 0 
+    ? hero.personalInfo.titles 
+    : [
+        "Full Stack Developer",
+        "Passionate about AI/ML",
+        "Tech Enthusiast",
+        "Problem Solver",
+      ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,8 +49,8 @@ export const HeroSection = () => {
           <div className="flex justify-center lg:justify-end lg:order-2 opacity-0 animate-fade-in-delay-3">
             <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl">
               <img
-                src="/shubhanan.jpg"
-                alt="Shubhanan Sharma"
+                src={hero?.personalInfo?.profileImage || "/tsMain.png"}
+                alt={hero?.personalInfo?.name || "Profile"}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -55,7 +61,7 @@ export const HeroSection = () => {
             <div className="space-y-3 lg:space-y-4">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
                 <span className="text-primary bg-clip-text opacity-0 animate-fade-in-delay-1">
-                  Shubhanan Sharma
+                  {hero?.personalInfo?.name || "Thomas Stefen Mardianto"}
                 </span>
               </h1>
 
@@ -66,9 +72,7 @@ export const HeroSection = () => {
               </h2>
 
               <p className="text-base lg:text-lg text-foreground/70 max-w-xl leading-relaxed opacity-0 animate-fade-in-delay-3 mx-auto lg:mx-0 px-2 lg:px-0">
-                I'm a developer who loves turning ideas into real, usable
-                products. What started as curiosity grew into a passion for
-                building tools I'd actually use—whether simple or ambitious.
+                {hero?.personalInfo?.description || "Information System and Technology ITB graduate who interested in software, data, and AI engineering. Experienced in developing products, pipelines, and automations."}
               </p>
             </div>
 
@@ -78,12 +82,12 @@ export const HeroSection = () => {
                 onClick={() => scrollToSection("projects")}
                 className="group flex items-center justify-center gap-2 bg-foreground text-background px-5 lg:px-6 py-2.5 lg:py-3 rounded-lg font-medium hover:bg-foreground/90 transition-all duration-300 hover:scale-105"
               >
-                View My Work
+                View My Projects
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
 
               <a
-                href="https://drive.google.com/file/d/1rlKmygPq1swT7B50DO6JE8EihgzyDCTJ/view?usp=sharing"
+                href={hero?.personalInfo?.resumeUrl || "https://drive.google.com/file/d/1rlKmygPq1swT7B50DO6JE8EihgzyDCTJ/view?usp=sharing"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 border border-border text-foreground px-5 lg:px-6 py-2.5 lg:py-3 rounded-lg font-medium hover:bg-card transition-all duration-300 hover:scale-105"
@@ -95,38 +99,48 @@ export const HeroSection = () => {
 
             {/* Social links */}
             <div className="flex gap-3 lg:gap-4 opacity-0 animate-fade-in-delay-5 justify-center lg:justify-start">
-              <a
-                href="https://github.com/shubhs27"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 lg:p-3 border border-border rounded-lg text-foreground/70 hover:text-foreground hover:border-primary transition-all duration-300 hover:scale-110"
-              >
-                <Github className="h-4 w-4 lg:h-5 lg:w-5" />
-              </a>
-              <a
-                href="https://leetcode.com/u/shubhs27/"
-                className="p-2.5 lg:p-3 border border-border rounded-lg text-foreground/70 hover:text-foreground hover:border-primary transition-all duration-300 hover:scale-110"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
-                  alt="LeetCode"
-                  className="h-4 w-4 lg:h-5 lg:w-5 grayscale invert opacity-70 hover:opacity-100 transition-opacity duration-300"
-                />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/shubhs27/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2.5 lg:p-3 border border-border rounded-lg text-foreground/70 hover:text-foreground hover:border-primary transition-all duration-300 hover:scale-110"
-              >
-                <Linkedin className="h-4 w-4 lg:h-5 lg:w-5" />
-              </a>
-              <a
-                href="mailto:shubhanans@gmail.com"
-                className="p-2.5 lg:p-3 border border-border rounded-lg text-foreground/70 hover:text-foreground hover:border-primary transition-all duration-300 hover:scale-110"
-              >
-                <Mail className="h-4 w-4 lg:h-5 lg:w-5" />
-              </a>
+              {hero?.socialLinks?.github && (
+                <a
+                  href={hero.socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 lg:p-3 border border-border rounded-lg text-foreground/70 hover:text-foreground hover:border-primary transition-all duration-300 hover:scale-110"
+                >
+                  <Github className="h-4 w-4 lg:h-5 lg:w-5" />
+                </a>
+              )}
+              {hero?.socialLinks?.leetcode && (
+                <a
+                  href={hero.socialLinks.leetcode}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 lg:p-3 border border-border rounded-lg text-foreground/70 hover:text-foreground hover:border-primary transition-all duration-300 hover:scale-110"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
+                    alt="LeetCode"
+                    className="h-4 w-4 lg:h-5 lg:w-5 grayscale invert opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </a>
+              )}
+              {hero?.socialLinks?.linkedin && (
+                <a
+                  href={hero.socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 lg:p-3 border border-border rounded-lg text-foreground/70 hover:text-foreground hover:border-primary transition-all duration-300 hover:scale-110"
+                >
+                  <Linkedin className="h-4 w-4 lg:h-5 lg:w-5" />
+                </a>
+              )}
+              {hero?.socialLinks?.email && (
+                <a
+                  href={`mailto:${hero.socialLinks.email}`}
+                  className="p-2.5 lg:p-3 border border-border rounded-lg text-foreground/70 hover:text-foreground hover:border-primary transition-all duration-300 hover:scale-110"
+                >
+                  <Mail className="h-4 w-4 lg:h-5 lg:w-5" />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -144,7 +158,7 @@ export const HeroSection = () => {
       </button>
 
       {/* Custom styles */}
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in {
           from {
             opacity: 0;

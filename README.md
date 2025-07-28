@@ -157,8 +157,8 @@ A modern, responsive portfolio website showcasing my skills, projects, and profe
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/shubhs27/portfolio-website.git
-   cd portfolio-website
+   git clone https://github.com/T0MYAMMM/portfolio-with-admin.git
+   cd portfolio-with-admin
    ```
 
 2. **Install dependencies**:
@@ -207,5 +207,3 @@ This project is open source and available under the [MIT License](LICENSE).
 - **Vite** for fast development experience
 
 ---
-
-**Built with ❤️ by Shubhanan Sharma**

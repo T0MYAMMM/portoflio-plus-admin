@@ -1,322 +1,29 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const skillsData = {
-  Languages: [
-    {
-      name: "Python",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-    },
-    {
-      name: "JavaScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-    },
-    {
-      name: "TypeScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-    },
-    {
-      name: "Java",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-    },
-    {
-      name: "C",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
-    },
-    {
-      name: "C++",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
-    },
-    {
-      name: "HTML",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-    },
-    {
-      name: "CSS",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-    },
-  ],
-  Frontend: [
-    {
-      name: "React",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-      name: "Next.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    },
-    {
-      name: "Redux",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
-    },
-    {
-      name: "Context API",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-      name: "React Router",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-      name: "React Query",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-      name: "React Hooks",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    {
-      name: "React Hook Form",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-  ],
-  Styling: [
-    {
-      name: "CSS Modules",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-    },
-    {
-      name: "Tailwind CSS",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-    },
-    {
-      name: "Styled Components",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/styledcomponents/styledcomponents-original.svg",
-    },
-    {
-      name: "Framer Motion",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framermotion/framermotion-original.svg",
-    },
-  ],
-  Backend: [
-    {
-      name: "Node.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-    },
-    {
-      name: "Express.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-    },
-    {
-      name: "Pug",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pug/pug-original.svg",
-    },
-    {
-      name: "Mongoose",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg",
-    },
-    {
-      name: "REST API",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
-    },
-  ],
-  "ML/Data Science": [
-    {
-      name: "TensorFlow",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
-    },
-    {
-      name: "Keras",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg",
-    },
-    {
-      name: "OpenCV",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg",
-    },
-    {
-      name: "PyTorch",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg",
-    },
-    {
-      name: "Scikit-Learn",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg",
-    },
-    {
-      name: "NumPy",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg",
-    },
-    {
-      name: "Pandas",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
-    },
-    {
-      name: "Matplotlib",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg",
-    },
-    {
-      name: "SciPy",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scipy/scipy-original.svg",
-    },
-  ],
-  Database: [
-    {
-      name: "MongoDB",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    },
-    {
-      name: "MySQL",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-    },
-    {
-      name: "Supabase",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
-    },
-  ],
-  "Tools & IDEs": [
-    {
-      name: "Visual Studio Code",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-    },
-    {
-      name: "IntelliJ IDEA",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg",
-    },
-    {
-      name: "Postman",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-    },
-    {
-      name: "Jupyter Notebook",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg",
-    },
-    {
-      name: "Git",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-    },
-  ],
-  Concepts: [
-    {
-      name: "Data Structures & Algorithms",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
-    },
-    {
-      name: "System Design",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-original.svg",
-    },
-    {
-      name: "DBMS",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-    },
-    {
-      name: "OOPs",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-    },
-    {
-      name: "Computer Networks",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg",
-    },
-    {
-      name: "Operating Systems",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
-    },
-  ],
-};
-
-const Tab = ({ children, setPosition, isActive, onClick }) => {
-  const ref = useRef(null);
-
-  return (
-    <li
-      ref={ref}
-      onMouseEnter={() => {
-        if (!ref?.current) return;
-        const { width } = ref.current.getBoundingClientRect();
-        setPosition({
-          left: ref.current.offsetLeft,
-          width,
-          opacity: 1,
-        });
-      }}
-      onClick={onClick}
-      className={`relative z-10 block cursor-pointer px-2 py-1.5 text-xs font-medium transition-colors duration-200 sm:px-3 sm:py-2 md:px-4 md:py-3 md:text-sm ${
-        isActive ? "text-white" : "text-foreground hover:text-foreground/80"
-      }`}
-    >
-      {children}
-    </li>
-  );
-};
-
-const Cursor = ({ position }) => {
-  return (
-    <motion.li
-      animate={{
-        ...position,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      }}
-      className="absolute z-0 h-6 rounded-lg bg-primary sm:h-8 sm:rounded-xl md:h-11"
-    />
-  );
-};
-
-const SlideTabs = ({ tabs, activeTab, setActiveTab }) => {
-  const [position, setPosition] = useState({
-    left: 0,
-    width: 0,
-    opacity: 0,
-  });
-
-  // Set initial position for active tab
-  useEffect(() => {
-    const activeIndex = tabs.indexOf(activeTab);
-    const activeElement = document.querySelector(
-      `[data-tab-index="${activeIndex}"]`
-    );
-    if (activeElement) {
-      const { width } = activeElement.getBoundingClientRect();
-      setPosition({
-        left: activeElement.offsetLeft,
-        width,
-        opacity: 1,
-      });
-    }
-  }, [activeTab, tabs]);
-
-  return (
-    <div className="overflow-x-auto scrollbar-hide">
-      <ul
-        onMouseLeave={() => {
-          // Reset to active tab position
-          const activeIndex = tabs.indexOf(activeTab);
-          const activeElement = document.querySelector(
-            `[data-tab-index="${activeIndex}"]`
-          );
-          if (activeElement) {
-            const { width } = activeElement.getBoundingClientRect();
-            setPosition({
-              left: activeElement.offsetLeft,
-              width,
-              opacity: 1,
-            });
-          }
-        }}
-        className="relative mx-auto flex w-max min-w-full sm:w-fit rounded-xl sm:rounded-2xl border-2 border-border bg-card p-1 shadow-sm"
-      >
-        {tabs.map((tab, index) => (
-          <div key={tab} data-tab-index={index}>
-            <Tab
-              setPosition={setPosition}
-              isActive={activeTab === tab}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab}
-            </Tab>
-          </div>
-        ))}
-        <Cursor position={position} />
-      </ul>
-    </div>
-  );
-};
+import usePortfolioStore from '../admin/store/portfolioStore';
 
 export const SkillsSection = () => {
-  const [activeTab, setActiveTab] = useState("Languages");
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const { skills } = usePortfolioStore();
+  
+  // Use store data, fallback to empty object if no data
+  const skillsData = skills || {};
   const tabs = Object.keys(skillsData);
+  
+  // Set default active tab to first available tab or fallback
+  const [activeTab, setActiveTab] = useState(tabs[0] || "Languages");
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  // Update active tab when skills data changes
+  useEffect(() => {
+    if (tabs.length > 0 && !tabs.includes(activeTab)) {
+      setActiveTab(tabs[0]);
+    }
+  }, [tabs, activeTab]);
+
+  // Don't render section if no skills data
+  if (tabs.length === 0) {
+    return null;
+  }
 
   // Animation variants
   const headerVariants = {
@@ -518,6 +225,107 @@ export const SkillsSection = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const Tab = ({ children, setPosition, isActive, onClick }) => {
+  const ref = useRef(null);
+
+  return (
+    <li
+      ref={ref}
+      onMouseEnter={() => {
+        if (!ref?.current) return;
+        const { width } = ref.current.getBoundingClientRect();
+        setPosition({
+          left: ref.current.offsetLeft,
+          width,
+          opacity: 1,
+        });
+      }}
+      onClick={onClick}
+      className={`relative z-10 block cursor-pointer px-2 py-1.5 text-xs font-medium transition-colors duration-200 sm:px-3 sm:py-2 md:px-4 md:py-3 md:text-sm ${
+        isActive ? "text-white" : "text-foreground hover:text-foreground/80"
+      }`}
+    >
+      {children}
+    </li>
+  );
+};
+
+const Cursor = ({ position }) => {
+  return (
+    <motion.li
+      animate={{
+        ...position,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+      }}
+      className="absolute z-0 h-6 rounded-lg bg-primary sm:h-8 sm:rounded-xl md:h-11"
+    />
+  );
+};
+
+const SlideTabs = ({ tabs, activeTab, setActiveTab }) => {
+  const [position, setPosition] = useState({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
+
+  // Set initial position for active tab
+  useEffect(() => {
+    const activeIndex = tabs.indexOf(activeTab);
+    const activeElement = document.querySelector(
+      `[data-tab-index="${activeIndex}"]`
+    );
+    if (activeElement) {
+      const { width } = activeElement.getBoundingClientRect();
+      setPosition({
+        left: activeElement.offsetLeft,
+        width,
+        opacity: 1,
+      });
+    }
+  }, [activeTab, tabs]);
+
+  return (
+    <div className="overflow-x-auto scrollbar-hide">
+      <ul
+        onMouseLeave={() => {
+          // Reset to active tab position
+          const activeIndex = tabs.indexOf(activeTab);
+          const activeElement = document.querySelector(
+            `[data-tab-index="${activeIndex}"]`
+          );
+          if (activeElement) {
+            const { width } = activeElement.getBoundingClientRect();
+            setPosition({
+              left: activeElement.offsetLeft,
+              width,
+              opacity: 1,
+            });
+          }
+        }}
+        className="relative mx-auto flex w-max min-w-full sm:w-fit rounded-xl sm:rounded-2xl border-2 border-border bg-card p-1 shadow-sm"
+      >
+        {tabs.map((tab, index) => (
+          <div key={tab} data-tab-index={index}>
+            <Tab
+              setPosition={setPosition}
+              isActive={activeTab === tab}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </Tab>
+          </div>
+        ))}
+        <Cursor position={position} />
+      </ul>
+    </div>
   );
 };
 
