@@ -87,7 +87,7 @@ export const HeroSection = () => {
               </button>
 
               <a
-                href={hero?.personalInfo?.resumeUrl || "https://drive.google.com/file/d/1rlKmygPq1swT7B50DO6JE8EihgzyDCTJ/view?usp=sharing"}
+                href={hero?.personalInfo?.resumeUrl || "https://drive.google.com/file/d/1mIpGnOYt63MbRmYkAYR9uBeyi6XtXVEm/view"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 border border-border text-foreground px-5 lg:px-6 py-2.5 lg:py-3 rounded-lg font-medium hover:bg-card transition-all duration-300 hover:scale-105"

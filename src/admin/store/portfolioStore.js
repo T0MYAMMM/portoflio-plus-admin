@@ -16,7 +16,7 @@ const usePortfolioStore = create(
           ],
           description: "Information System and Technology ITB graduate who interested in software, data, and AI engineering. Experienced in developing products, pipelines, and automations.",
           profileImage: "/tsMain.png",
-          resumeUrl: "https://drive.google.com/file/d/1rlKmygPq1swT7B50DO6JE8EihgzyDCTJ/view?usp=sharing"
+          resumeUrl: "https://drive.google.com/file/d/1mIpGnOYt63MbRmYkAYR9uBeyi6XtXVEm/view"
         },
         socialLinks: {
           github: "https://github.com/T0MYAMMM",
