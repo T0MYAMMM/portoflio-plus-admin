@@ -267,6 +267,7 @@ export const SkillsAdmin = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
+                autoComplete="off"
               />
             </div>
           </div>
@@ -467,7 +468,7 @@ export const SkillsAdmin = () => {
         description={`${editingSkill ? 'Update' : 'Add'} skill in ${selectedCategory} category`}
         size="md"
       >
-        <form onSubmit={skillForm.handleSubmit(onSkillSubmit)} className="space-y-4">
+        <form onSubmit={skillForm.handleSubmit(onSkillSubmit)} className="space-y-4" role="form" aria-label="Skill entry form" noValidate>
           <Controller
             name="name"
             control={skillForm.control}

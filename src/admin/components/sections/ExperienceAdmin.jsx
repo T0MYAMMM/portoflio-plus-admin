@@ -269,6 +269,7 @@ export const ExperienceAdmin = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
+                autoComplete="off"
               />
             </div>
           </div>
@@ -442,7 +443,7 @@ export const ExperienceAdmin = () => {
         description={editingId ? "Update the experience details" : "Add a new work experience to your portfolio"}
         size="lg"
       >
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" role="form" aria-label="Experience entry form" noValidate>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Controller
               name="title"

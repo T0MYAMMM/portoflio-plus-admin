@@ -292,6 +292,7 @@ export const ProjectsAdmin = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
+                autoComplete="off"
               />
             </div>
           </div>
@@ -547,7 +548,7 @@ export const ProjectsAdmin = () => {
         description={editingId ? "Update the project details" : "Add a new project to your portfolio"}
         size="xl"
       >
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" role="form" aria-label="Project entry form" noValidate>
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Controller

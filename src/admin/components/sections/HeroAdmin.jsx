@@ -123,7 +123,7 @@ export const HeroAdmin = () => {
 
 
       
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" role="form" aria-label="Hero section configuration form" noValidate>
         {/* Personal Information Section */}
         <div className="bg-card border border-border rounded-lg p-6">
           <div className="flex items-center gap-2 mb-6">
@@ -145,6 +145,7 @@ export const HeroAdmin = () => {
                     required
                     error={errors.personalInfo?.name?.message}
                     description="This will be displayed as your main heading"
+                    autoComplete="name"
                   />
                 )}
               />
@@ -162,6 +163,7 @@ export const HeroAdmin = () => {
                     rows={4}
                     error={errors.personalInfo?.description?.message}
                     description="A short bio that appears below your name"
+                    autoComplete="off"
                   />
                 )}
               />
@@ -177,6 +179,7 @@ export const HeroAdmin = () => {
                     placeholder="https://example.com/resume.pdf"
                     error={errors.personalInfo?.resumeUrl?.message}
                     description="Link to your resume (Google Drive, PDF, etc.)"
+                    autoComplete="url"
                   />
                 )}
               />
@@ -229,6 +232,7 @@ export const HeroAdmin = () => {
                     {...form.register(`personalInfo.titles.${index}`)}
                     placeholder={`Title ${index + 1}`}
                     className="flex-1 px-3 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background transition-colors"
+                    autoComplete="off"
                   />
                   {form.watch('personalInfo.titles').length > 1 && (
                     <button
@@ -289,6 +293,7 @@ export const HeroAdmin = () => {
                   label="GitHub"
                   placeholder="https://github.com/username"
                   error={errors.socialLinks?.github?.message}
+                  autoComplete="url"
                 />
               )}
             />
@@ -303,6 +308,7 @@ export const HeroAdmin = () => {
                   label="LinkedIn"
                   placeholder="https://linkedin.com/in/username"
                   error={errors.socialLinks?.linkedin?.message}
+                  autoComplete="url"
                 />
               )}
             />
@@ -317,6 +323,7 @@ export const HeroAdmin = () => {
                   label="LeetCode"
                   placeholder="https://leetcode.com/username"
                   error={errors.socialLinks?.leetcode?.message}
+                  autoComplete="url"
                 />
               )}
             />
@@ -332,6 +339,7 @@ export const HeroAdmin = () => {
                   placeholder="your.email@example.com"
                   required
                   error={errors.socialLinks?.email?.message}
+                  autoComplete="email"
                 />
               )}
             />
