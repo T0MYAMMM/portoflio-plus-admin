@@ -228,12 +228,19 @@ export const HeroAdmin = () => {
             <div className="space-y-2">
               {form.watch('personalInfo.titles')?.map((title, index) => (
                 <div key={index} className="flex items-center gap-2">
-                  <input
-                    {...form.register(`personalInfo.titles.${index}`)}
-                    placeholder={`Title ${index + 1}`}
-                    className="flex-1 px-3 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background transition-colors"
-                    autoComplete="off"
-                  />
+                  <div className="flex-1">
+                    <label htmlFor={`title-${index}`} className="sr-only">
+                      Title {index + 1}
+                    </label>
+                    <input
+                      {...form.register(`personalInfo.titles.${index}`)}
+                      id={`title-${index}`}
+                      name={`personalInfo.titles.${index}`}
+                      placeholder={`Title ${index + 1}`}
+                      className="w-full px-3 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background transition-colors"
+                      autoComplete="off"
+                    />
+                  </div>
                   {form.watch('personalInfo.titles').length > 1 && (
                     <button
                       type="button"
@@ -244,6 +251,7 @@ export const HeroAdmin = () => {
                         form.trigger('personalInfo.titles');
                       }}
                       className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                      aria-label={`Remove title ${index + 1}`}
                     >
                       ×
                     </button>

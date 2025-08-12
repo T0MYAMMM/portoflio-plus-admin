@@ -261,28 +261,42 @@ export const SkillsAdmin = () => {
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-foreground/40" />
+              <label htmlFor="skills-search" className="sr-only">
+                Search skills and categories
+              </label>
               <input
+                id="skills-search"
+                name="skills-search"
                 type="text"
                 placeholder="Search skills and categories..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
                 autoComplete="off"
+                aria-label="Search skills and categories"
               />
             </div>
           </div>
 
           {/* Category Filter */}
-          <select
-            value={selectedCategoryFilter}
-            onChange={(e) => setSelectedCategoryFilter(e.target.value)}
-            className="px-3 py-2 border border-border rounded-lg text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-          >
-            <option value="all">All Categories</option>
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
-            ))}
-          </select>
+          <div>
+            <label htmlFor="skills-category-filter" className="sr-only">
+              Filter by skill category
+            </label>
+            <select
+              id="skills-category-filter"
+              name="skills-category-filter"
+              value={selectedCategoryFilter}
+              onChange={(e) => setSelectedCategoryFilter(e.target.value)}
+              className="px-3 py-2 border border-border rounded-lg text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              aria-label="Filter by skill category"
+            >
+              <option value="all">All Categories</option>
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div className="mt-3 text-sm text-foreground/60">

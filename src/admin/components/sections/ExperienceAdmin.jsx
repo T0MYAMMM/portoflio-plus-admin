@@ -263,45 +263,67 @@ export const ExperienceAdmin = () => {
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-foreground/40" />
+              <label htmlFor="experience-search" className="sr-only">
+                Search experience entries
+              </label>
               <input
+                id="experience-search"
+                name="experience-search"
                 type="text"
                 placeholder="Search experiences..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
                 autoComplete="off"
+                aria-label="Search experience entries"
               />
             </div>
           </div>
 
           {/* Type Filter */}
-          <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-3 py-2 border border-border rounded-lg text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-          >
-            <option value="all">All Types</option>
-            <option value="On-site">On-site</option>
-            <option value="Hybrid">Hybrid</option>
-            <option value="Remote">Remote</option>
-          </select>
+          <div>
+            <label htmlFor="experience-type-filter" className="sr-only">
+              Filter by work type
+            </label>
+            <select
+              id="experience-type-filter"
+              name="experience-type-filter"
+              value={typeFilter}
+              onChange={(e) => setTypeFilter(e.target.value)}
+              className="px-3 py-2 border border-border rounded-lg text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              aria-label="Filter by work type"
+            >
+              <option value="all">All Types</option>
+              <option value="On-site">On-site</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="Remote">Remote</option>
+            </select>
+          </div>
 
           {/* Sort */}
-          <select
-            value={`${sortBy}-${sortDirection}`}
-            onChange={(e) => {
-              const [field, direction] = e.target.value.split('-');
-              setSortBy(field);
-              setSortDirection(direction);
-            }}
-            className="px-3 py-2 border border-border rounded-lg text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-          >
-            <option value="order-asc">Order (A-Z)</option>
-            <option value="startDate-desc">Date (Newest)</option>
-            <option value="startDate-asc">Date (Oldest)</option>
-            <option value="title-asc">Title (A-Z)</option>
-            <option value="company-asc">Company (A-Z)</option>
-          </select>
+          <div>
+            <label htmlFor="experience-sort" className="sr-only">
+              Sort experience entries
+            </label>
+            <select
+              id="experience-sort"
+              name="experience-sort"
+              value={`${sortBy}-${sortDirection}`}
+              onChange={(e) => {
+                const [field, direction] = e.target.value.split('-');
+                setSortBy(field);
+                setSortDirection(direction);
+              }}
+              className="px-3 py-2 border border-border rounded-lg text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              aria-label="Sort experience entries"
+            >
+              <option value="order-asc">Order (A-Z)</option>
+              <option value="startDate-desc">Date (Newest)</option>
+              <option value="startDate-asc">Date (Oldest)</option>
+              <option value="title-asc">Title (A-Z)</option>
+              <option value="company-asc">Company (A-Z)</option>
+            </select>
+          </div>
         </div>
 
         <div className="mt-3 text-sm text-foreground/60">

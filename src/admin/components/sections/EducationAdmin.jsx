@@ -236,33 +236,47 @@ export const EducationAdmin = () => {
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-foreground/40" />
+              <label htmlFor="education-search" className="sr-only">
+                Search education entries
+              </label>
               <input
+                id="education-search"
+                name="education-search"
                 type="text"
                 placeholder="Search education..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-foreground placeholder-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
                 autoComplete="off"
+                aria-label="Search education entries"
               />
             </div>
           </div>
 
           {/* Sort */}
-          <select
-            value={`${sortBy}-${sortDirection}`}
-            onChange={(e) => {
-              const [field, direction] = e.target.value.split('-');
-              setSortBy(field);
-              setSortDirection(direction);
-            }}
-            className="px-3 py-2 border border-border rounded-lg text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-          >
-            <option value="order-asc">Order (A-Z)</option>
-            <option value="endDate-desc">Graduation (Newest)</option>
-            <option value="endDate-asc">Graduation (Oldest)</option>
-            <option value="degree-asc">Degree (A-Z)</option>
-            <option value="institution-asc">Institution (A-Z)</option>
-          </select>
+          <div>
+            <label htmlFor="education-sort" className="sr-only">
+              Sort education entries
+            </label>
+            <select
+              id="education-sort"
+              name="education-sort"
+              value={`${sortBy}-${sortDirection}`}
+              onChange={(e) => {
+                const [field, direction] = e.target.value.split('-');
+                setSortBy(field);
+                setSortDirection(direction);
+              }}
+              className="px-3 py-2 border border-border rounded-lg text-foreground bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              aria-label="Sort education entries"
+            >
+              <option value="order-asc">Order (A-Z)</option>
+              <option value="endDate-desc">Graduation (Newest)</option>
+              <option value="endDate-asc">Graduation (Oldest)</option>
+              <option value="degree-asc">Degree (A-Z)</option>
+              <option value="institution-asc">Institution (A-Z)</option>
+            </select>
+          </div>
         </div>
 
         <div className="mt-3 text-sm text-foreground/60">
