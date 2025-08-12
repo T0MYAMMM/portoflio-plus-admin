@@ -141,7 +141,7 @@ export const ContactAdmin = () => {
         </div>
       </div>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" role="form" aria-label="Contact information configuration form" noValidate>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {/* EmailJS Configuration */}
         <div className="bg-card border border-border rounded-lg p-6">
           <div className="flex items-center justify-between mb-6">
@@ -257,7 +257,6 @@ export const ContactAdmin = () => {
                   required
                   error={errors.socialLinks?.email?.message}
                   description="Primary contact email"
-                  autoComplete="email"
                 />
               )}
             />
@@ -273,7 +272,6 @@ export const ContactAdmin = () => {
                   placeholder="+1 (555) 123-4567"
                   error={errors.socialLinks?.phone?.message}
                   description="Optional phone number"
-                  autoComplete="tel"
                 />
               )}
             />
@@ -288,7 +286,6 @@ export const ContactAdmin = () => {
                   label="GitHub Profile"
                   placeholder="https://github.com/username"
                   error={errors.socialLinks?.github?.message}
-                  autoComplete="url"
                 />
               )}
             />
@@ -303,7 +300,6 @@ export const ContactAdmin = () => {
                   label="LinkedIn Profile"
                   placeholder="https://linkedin.com/in/username"
                   error={errors.socialLinks?.linkedin?.message}
-                  autoComplete="url"
                 />
               )}
             />

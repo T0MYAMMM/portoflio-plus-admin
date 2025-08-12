@@ -79,23 +79,6 @@ export const Login = () => {
 
         {/* Login Form */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          {/* Hidden username field for accessibility */}
-          <div className="sr-only">
-            <label htmlFor="username" className="sr-only">
-              Username
-            </label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              autoComplete="username"
-              value="admin"
-              readOnly
-              tabIndex={-1}
-              aria-hidden="true"
-            />
-          </div>
-          
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2">
               Password
